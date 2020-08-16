@@ -4,6 +4,7 @@
 \usepackage{apacite}
 \usepackage[T1]{fontenc}
 \usepackage{url}
+\usepackage{amsmath}
 
 % set line spacing
 \usepackage{setspace}
@@ -76,6 +77,27 @@ Euclidean distance was the most used distance, but it cannot obtain better accur
 
 \subsection{Euclidean distance}
 Euclidean distance is the most commonly adopted distance measures that pair-wisely computes the distance between corresponding points of two trajectories. Besides being relatively straightforward and intuitive, Euclidean distance and its variants have several other advantages. The complexity of evaluating these measures is linear; in addition, they are easy to implement, indexable withany access method, and parameter free. Euclidean distance was proposed as a distance measure between time series and was once considered as one of the most widely used distance functions since the 1960s \citep{keogh2000scaling,faloutsos1994fast,pfeifer1980three,priestley1980state}.
+
+For two trajectories $T_{1}\,and\,T_{2}$, the Euclidean distance $d_{Euclidean}(T_{1}, T_{2})$ with the same size $n$ is define as follow:
+
+\begin{equation} \label{eq1}
+    d_{Euclidean}(T_{1}, T_{2}) = \frac{\sum_{i=1}^n d(p_{1,i}, p_{2,i})}{n}
+\end{equation}
+
+Where $p_{1,i}$ and $p_{2,i}$ are the ith sample point of $T_{1}$ and $T_{2}$ respectively. The time complexity is $O(n)$. Euclidean distance measure is straightforward; however, it requires the comparing trajectories to be the same size, which is not common in the actual situation; otherwise it will fail to decide the match pairs of the trajectories to be compared.
+
+\subsection{DTW}
+Dynamic time warping (DTW) is an algorithm for measuring the distance between two sequences. DTW has existed for over a hundred years. Initially, DTW was introduced to compute the distance of time series \citep{myers1980performance}. In 1980s, DTW was introduced to measure trajectory distance \citep{kruskal1983overview} and has become one of the most popular trajectory distance measure since then. DTW distance is defined in a recursive manner and can be easily applied in dynamic programming. It searches through all possible points’alignment between two trajectories for the one with minimal distance. Specifically, the DTW $d_{DTW} (T_{1},T_{2})$ between two trajectories $T_{1}$ and $T_{2}$ with lengths of $n$ and $m$ is defined as:
+
+\begin{equation} \label{eq2}
+    d_{DTW} (T_{1},T_{2}) = \begin{cases}
+                                0, if\:n\:=\:0\:and\:m\:=\:0 \\
+                                \infty, if\:n\:=\:0\:or\:m\:=\:0 \\
+                                d(Head(T_{1}), Head(T_{2})) + min\{d_{DTW}(T_{1}, Rest(T_{2})), \\ d_{DTW}(Rest(T_{1}), T_{2}), d_{DTW}(Rest(T_{1}), Rest(T_{2}) \} \: otherwise
+                            \end{cases}
+\end{equation}
+
+The time complexity of DTW is $O(mn)$.
 
 % Two common styles, pick one or find alternate bst.
 % \citet{john} is like John (1985); \citep{jane} is like (Jane 1985)
