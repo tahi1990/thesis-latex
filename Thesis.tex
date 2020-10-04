@@ -77,18 +77,14 @@ Euclidean distance was the most used distance, but it cannot obtain better accur
 
 \subsubsection{Euclidean distance}
 Euclidean distance is the most commonly adopted distance measures that pair-wisely computes the distance between corresponding points of two trajectories. Besides being relatively straightforward and intuitive, Euclidean distance and its variants have several other advantages. The complexity of evaluating these measures is linear; in addition, they are easy to implement, indexable withany access method, and parameter free. Euclidean distance was proposed as a distance measure between time series and was once considered as one of the most widely used distance functions since the 1960s \citep{keogh2000scaling,faloutsos1994fast,pfeifer1980three,priestley1980state}.
-
 For two trajectories $T_{1}\,and\,T_{2}$, the Euclidean distance $d_{Euclidean}(T_{1}, T_{2})$ with the same size $n$ is define as follow:
-
 \begin{equation} \label{eq1}
     d_{Euclidean}(T_{1}, T_{2}) = \frac{\sum_{i=1}^n d(p_{1,i}, p_{2,i})}{n}
 \end{equation}
-
 Where $p_{1,i}$ and $p_{2,i}$ are the ith sample point of $T_{1}$ and $T_{2}$ respectively. The time complexity is $O(n)$. Euclidean distance measure is straightforward; however, it requires the comparing trajectories to be the same size, which is not common in the actual situation; otherwise it will fail to decide the match pairs of the trajectories to be compared.
 
 \subsubsection{DTW}
 \textit{Dynamic time warping} (DTW) is an algorithm for measuring the distance between two sequences. DTW has existed for over a hundred years. Initially, DTW was introduced to compute the distance of time series \citep{myers1980performance}. In 1980s, DTW was introduced to measure trajectory distance \citep{kruskal1983overview} and has become one of the most popular trajectory distance measure since then. DTW distance is defined in a recursive manner and can be easily applied in dynamic programming. It searches through all possible points’alignment between two trajectories for the one with minimal distance. Specifically, the DTW $d_{DTW} (T_{1},T_{2})$ between two trajectories $T_{1}\,and\,T_{2}$ with lengths of $n\,and\,m$ is defined as:
-
 \begin{equation} \label{eq2}
     d_{DTW} (T_{1},T_{2}) = \begin{cases}
                                 0, if\:n\:=\:0\:and\:m\:=\:0 \\
@@ -96,19 +92,16 @@ Where $p_{1,i}$ and $p_{2,i}$ are the ith sample point of $T_{1}$ and $T_{2}$ re
                                 d(Head(T_{1}), Head(T_{2})) + min\{d_{DTW}(T_{1}, Rest(T_{2})), \\ d_{DTW}(Rest(T_{1}), T_{2}), d_{DTW}(Rest(T_{1}), Rest(T_{2}) \} \: otherwise
                             \end{cases}
 \end{equation}
-
 The time complexity of DTW is $O(mn)$.
 
 \subsubsection{LCSS}
 \textit{Longest common subsequence} (LCSS) and edit distance-based distance measures are the mainly used distance metrics of partial match measures. LCSS is a traditional similarity metric for strings, which is to find the longest subsequence com-mon to two compared strings. The value of LCSS similarity between sequences $S_{1}\,and\,S_{2}$ stands for the size of the longest common subsequence of $S_{1}\,and\,S_{2}$. Trajectory can be treated as a sequence of sample points, so LCSS was used to measure the similarity between trajectories. The value of LCSS similarity between trajectories $T_{1}\,and\,T_{2}$ stands for the size of the longest common subsequence of $T_{1}\,and\,T_{2}$. However, it can hardly find any two sample points with the exact same location information. Thus, in measuring the similarity of trajectories $T_{1}\,and\,T_{2}$, LCSS treats $p_{i}\,(p_{i} \in T_{1})\,and\,p_{j}\,(p_{j} \in T_{2})$ to be the same as long as the distance between $p_{i}\,and\,p_{j}$, which is less than a threshold $\epsilon$. Thus, some sample points of $T_{1}\,and\,T_{2}$ cannot be in any match pairs. Then LCSS distance simply counts the number of match pairs between $T_{1}\,and\,T_{2}$. Since the sample points far apart do not contribute to the value of LCSS distance, these sample points do not have match points. In contrast to Euclidean distance, LCSS is robust to noise. LCSS distance between trajectories is defined as:
-
 \begin{equation} \label{eq3}
     d_{LCSS}(T_{1}, T_{2}) = size(T_{1}) + size(T_{2}) - 2s_{LCSS}(T_{1},T_{2})
 \end{equation}
 
 \subsubsection{EDR}
 \textit{Edit Distance on Real sequence} (EDR) is an ED-based trajectory distance measure. The EDR distance $d_{EDR}(T_{1},T_{2})$ between two trajectories $T_{1}\,and\,T_{2}$ with lengths of $n\,and\,m$ respectively is the number of edits (insertion, deletion, or substitutions) needed to change $T_{1}\,and\,T_{2}$. Similar to LCSS, it can hardly find any two sample points with exactly the same location information. To measure the distance of trajectories $T_{1}\,and\,T_{2}$, EDR treats $p_{i}\,(p_{i} \in T_{1})\,and\,p_{j}\,(p_{j} \in T_{2})$ the same only if the locations of $p_{i}\,and\,p_{j}$ are within a range $\epsilon$. The distance $d_{EDR}(T_{1},T_{2})$ is defined as:
-
 \begin{equation} \label{eq4}
     d_{EDR}(T_{1}, T_{2}) = \begin{cases}
                                 n, if \:m\:=\:0 \\
@@ -119,12 +112,10 @@ The time complexity of DTW is $O(mn)$.
                                 \}, otherwise
                             \end{cases}
 \end{equation}
-
 Similar to LCSS, EDR is robust to noisy trajectory data. The disadvantage of EDR is that the distance value of EDR heavily relies on the parameter $\epsilon$, which is not easy for users to adjust; a not well adjusted $\epsilon$ may cause inaccuracy. The time complexity of EDR is $O(mn)$.
 
 \subsubsection{ERP}
 \textit{Edit distance with Real Penalty} (ERP) is a trajectory distance measure that combines Lp-norm and edit distance. As introduced above, Euclidean distance and DTW both use Lp-norm for measuring the distance between trajectories. However, they require every sample point to be in a match pair. ERP uses the edit-distance-like sample point matching method. In edit distance, there are 3 operations, i.e., addition, deletion and substitution. Thus, when a substitution operation happens on a sample point $p_{i}$ from $T_{1}$ for transforming $T_{1}\,to\,T_{2}$, there must be a counterpart $p_{j}$ from $T_{2}$ and ERP treats $p_{i}\,and\,p_{j}$ as a match pair. When an addition operation happens, $p_{j}$ is added to $T_{1}$ for transforming $T_{1}$ to $T_{2}$. ERP treats $p_{j}$ to be matched to an empty point, namely gap. When a deletion operation happens, $p_{i}$ is deleted from $T_{1}$ for transforming $T_{1}\,to\,T_{2}$, and ERP treats $p_{i}$ to be matched to a gap. The distance $d_{ERP}(T_{1},T_{2})$ is defined as:
-
 \begin{equation} \label{eq5}
     d_{ERP}(T_{1},T_{2}) = 
 \end{equation}
@@ -134,17 +125,39 @@ These distances try to catch geometric features of the trajectories, in particul
 
 \subsubsection{Fréchet distance}
 The Fréchet distance is a measure of similarity between curves that takes into account the location and ordering of the points along the curves. The Fréchet distance between the two curves is the length of the shortest leash sufficient for both to traverse their separate paths. Let $T_{1}\,and\,T_{2}$ be two trajectories which can be represented as two continuous functions $f_{1}\,and\,f_{2}$ over time $t$, where the starting time and end time of time period $t$ are denoted by $t.start$ and $t.end$ respectively. The Fréchet distance between $T_{1}\,and\,T_{2}$ is defined as the infimum over all reparameterizations $f_{1}(t)$ and $f_{2}(t)$. The Fréchet distance algorithm is shown below:
-
 \begin{equation} \label{eq6}
     d_{Frechet}(T_{1},T_{2}) = infmax_{t in [t.start, t.end]} \{d(f_{1}(t), f_{2}(t))\}
 \end{equation}
-
 The time complexity of Fréchet distance is $O(mn)$. Since its value is the longest distance between two trajectories at the same time, a noisy point is always far away from a trajectory, causing Fréchet distance to be very sensitive to noise.
 
 \subsubsection{Hausdorff distance}
 The Hausdorff distance is a metric. It measures the distance between two sets of metric spaces. Informally, two sets are close in the Hausdorff distance if every point of either set is close to some point of the other set. The Hausdorff distance is the longest distance you can be forced to travel by an adversary who chooses a point in one of two sets, from where you then must travel to other set. In other words, it is the greatest of all the distances from a point in one set to the closest point in the other set.
 
 \subsubsection{Symmetrized Segment-Path Distance (SSPD)}
+This distance is a shaped based distance. The Segment-Path distance from trajectory $T_{1}$ to $T_{2}$ is the mean of all distances from points composing $T_{1}$ to trajectory $T_{2}$.
+\begin{equation} \label{eq7}
+    d_{SPD}(T_{1},T_{2}) = \frac{1}{n} \sum_{i_{1}=1}^{n_{1}}D_{pt}(p_{i_{1}}^1, T_{2})
+\end{equation}
+Where
+\begin{equation} \label{eq8}
+    D_{pt}(p_{i_{1}}^1, T_{2}) = min_{i_{2} \in [0,\dots,n_{2}-1]}D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2)
+\end{equation}
+And $D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2)$ is \textit{Point-to-Segment distance}:
+\begin{equation} \label{eq9}
+    D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2) = \begin{cases}
+                                            n \\
+                                            min, otherwise 
+                                        \end{cases}
+\end{equation}
+The distance between $x$ and a segment $s$ is the shortest distance between x and any points of the segment.
+
+The \textit{Symmetrized Segment-Path Distance} is defined as:
+\begin{equation} \label{eq9}
+    D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2) = \begin{cases}
+                                            n \\
+                                            min, otherwise 
+                                        \end{cases}
+\end{equation}
 
 \section{Clustering}
 Clustering is the most common unsupervised learning method in pattern recognition. It is basically the task of grouping or “clustering” a set of objects such that similar objects reside in the same group together. Clustering algorithms have gained a lot of attention among researchers and therefore, a large number of clustering algorithms have evolved. In order to be successful with clustering a set of objects, first we need to understand the nature of the objects we need to cluster. We need to examine their properties and understand how these objects are inputted to an algorithm. For instance, one may be interested to know whether the data that needs to be clustered is inputted to the algorithm incrementally. This is an interesting problem when data is collected as clusters are evolving. On the other hand, the dataset can be present as a whole prior to the execution of the clustering algorithm. Additionally, the properties of the objects that need to be clustered are very important. These properties can give rise to a number of important questions such as if the objects are vector-based or if the objects are metric based. Moreover, one needs to know if objects can be transformed from one form to another so that further analysis can be done on them. One of the most important aspects of clustering is a way of comparing the objects which is widely known as a distance function. 
