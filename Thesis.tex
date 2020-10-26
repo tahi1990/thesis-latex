@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt]{article}
 % Allow the usage of graphics (.png, .jpg)
 \usepackage[pdftex]{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{apacite}
 \usepackage[T1]{fontenc}
 \usepackage{url}
@@ -11,6 +12,16 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2ex}
 \linespread{1.3}
+
+\usepackage{tocloft} % for list of equations
+% define list of equations
+\newcommand{\listequationsname}{\Large{List of Equations}}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{
+   \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}
+}
+\setlength{\cftmyequationsnumwidth}{2.3em}
+\setlength{\cftmyequationsindent}{1.5em}
 
 % Comment the following line to NOT allow the usage of umlauts
 \usepackage[utf8]{inputenc}
@@ -38,8 +49,18 @@
 
 \begin{document}
 
+\pagenumbering{gobble}
+
 % do cover pages
 \include{titlepage}
+
+\tableofcontents
+
+\listoffigures
+
+\listofmyequations
+
+\cleardoublepage
 
 \pagenumbering{arabic} % arabic(1234) numbering, autoreset to 1
 
@@ -77,10 +98,18 @@ Euclidean distance was the most used distance, but it cannot obtain better accur
 
 \subsubsection{Euclidean distance}
 Euclidean distance is the most commonly adopted distance measures that pair-wisely computes the distance between corresponding points of two trajectories. Besides being relatively straightforward and intuitive, Euclidean distance and its variants have several other advantages. The complexity of evaluating these measures is linear; in addition, they are easy to implement, indexable withany access method, and parameter free. Euclidean distance was proposed as a distance measure between time series and was once considered as one of the most widely used distance functions since the 1960s \citep{keogh2000scaling,faloutsos1994fast,pfeifer1980three,priestley1980state}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Euclidean.png}
+    \caption{Euclidean distance}
+\end{figure}
+
 For two trajectories $T_{1}\,and\,T_{2}$, the Euclidean distance $d_{Euclidean}(T_{1}, T_{2})$ with the same size $n$ is define as follow:
 \begin{equation} \label{eq1}
     d_{Euclidean}(T_{1}, T_{2}) = \frac{\sum_{i=1}^n d(p_{1,i}, p_{2,i})}{n}
 \end{equation}
+\myequations{Euclidean distance}
 Where $p_{1,i}$ and $p_{2,i}$ are the ith sample point of $T_{1}$ and $T_{2}$ respectively. The time complexity is $O(n)$. Euclidean distance measure is straightforward; however, it requires the comparing trajectories to be the same size, which is not common in the actual situation; otherwise it will fail to decide the match pairs of the trajectories to be compared.
 
 \subsubsection{DTW}
@@ -156,6 +185,45 @@ The \textit{Symmetrized Segment-Path Distance} is defined as:
     D_{SSPD}(T_{1}, T_{2}) = \frac{D_{SPD}(T_{1}, T_{2}) + D_{SPD}(T_{2}, T_{1})}{2}
 \end{equation}
 
+\subsubsection{C-SIM}
+C-SIM algorithm was proposed by \cite{mariescu2017grid} to compute similarity between two trajectories. It first retrieves the cell representation and then calculates the similarity measure using the cells. Intersection algorithm computes the intersection between two sets efficiently in linear time using the hashing technique as below:
+
+\textbf{C-SIM}: Computing Similarity Between Two Trajectories
+
+\textbf{Input}: Trajectories $T_{1}$ and $T_{2}$
+
+\textbf{Ouput}: Similarity
+
+\begin{itemize}
+    \item $C_{1}, C_{1}^d \leftarrow Points-to-Cells(T_{1})$
+    \item $C_{2}, C_{2}^d \leftarrow Points-to-Cells(T_{2})$
+    \item $cab \leftarrow Intersection(T_{1}, T_{2})$
+    \item $cab^d \leftarrow Intersection(T_{1}, T_{2}^d)$
+    \item $cba^d \leftarrow Intersection(T_{2}, T_{1}^d)$
+    \item $similarity \leftarrow (cab + cab^d + cba^d)/(|C_{1}| + |C_{2}| - cab)$
+\end{itemize}
+
+\textbf{Points-to-Cells}: Finding the set of Cells that approximate a given trajectory. \cite{mariescu2017grid} used a hashing method to keep track of cells already existing in the representation. With 25×25-meter-sized cells, a 100×100 km square results in a grid of size 4,000×4,000 cells. A trajectory consists of pairs of Easting and Northing values that passes through the cells. Gaps can appear in the cell representation when user is traveling faster than the cell length divided by sampling interval, or when user moves and the device fails to update the location or for some other reasons. The cells were generated in the order that the trajectory points were recorded; if two consecutively generated cells are not adjacent, the gap is filled by using linear interpolation with equation:
+
+\begin{equation} \label{eq11}
+    y = \frac{y_2 - y_1}{x_2 - x_1}(x - x_1) + y_1
+\end{equation}
+where $(x_1, y_1)$ and $(x_2, y_2)$ are the easting and northing values of the two cells inside a 100km square.
+
+\textbf{Intersection}: Jacard index was used to measure amount of similarity. It is calculated as the size of the intersection divided by the size of the union of two sets \citep{mariescu2017grid}:
+
+\begin{equation} \label{eq12}
+    J(C_A, C_B) = \frac{|C_A \cap C_B|}{|C_A \cup C_B|}
+\end{equation}
+
+Each of two trajectories are dilated separately, compute the two intersections with original of the other trajectory as follows:
+
+\begin{equation} \label{eq13}
+    S(C_A, C_B) = \frac{|C_A \cap C_B| + |C_A \cap C_B^d| + |C_B \cap C_A^d|}{|C_A| + |C_B| - |C_A \cup C_B|}
+\end{equation}
+
+The total time complexity of C-SIM is $O(N_A + N_B + |C_A| + |C_B|)$ where $N_A and N_B$ are the number of points in the two trajectories
+
 \section{Clustering}
 Clustering is the most common unsupervised learning method in pattern recognition. It is basically the task of grouping or “clustering” a set of objects such that similar objects reside in the same group together. Clustering algorithms have gained a lot of attention among researchers and therefore, a large number of clustering algorithms have evolved. In order to be successful with clustering a set of objects, first we need to understand the nature of the objects we need to cluster. We need to examine their properties and understand how these objects are inputted to an algorithm. For instance, one may be interested to know whether the data that needs to be clustered is inputted to the algorithm incrementally. This is an interesting problem when data is collected as clusters are evolving. On the other hand, the dataset can be present as a whole prior to the execution of the clustering algorithm. Additionally, the properties of the objects that need to be clustered are very important. These properties can give rise to a number of important questions such as if the objects are vector-based or if the objects are metric based. Moreover, one needs to know if objects can be transformed from one form to another so that further analysis can be done on them. One of the most important aspects of clustering is a way of comparing the objects which is widely known as a distance function. 
 
@@ -192,7 +260,33 @@ This is basic idea of using DBSCAN in trajectory clustering task according to \c
 A disadvantage of DBSCAN is that it struggles with data sets that contain clusters of varying densities \citep{ertoz2003finding}. An example of this is shown in .... If the chosen distance threshold is too small, all the points belonging to the sparse cluster will be considered noise. If the threshold is too large, all points will be in the same cluster. A possible solution might be to run the algorithm multiple times and removing the already found clusters from the data set after each run.
 
 \subsubsection{K-Medoid}
-K-medoids algorithm groups the data based on their distance to each other. Medoid is the representative of a cluster that has the maximum sum of similarity to others in the cluster 
+K-medoids algorithm groups the data based on their distance to each other. Medoid is the representative of a cluster that has the maximum sum of similarity to others in the cluster that has the minimum distance between this object and the medoid.
+
+Medoid is the representative of a cluster that has the maximum sum of similarity to others in the cluster [9]. It should be one of the objects in the set, which is different from Median [43]. Median is the value separates the higher half from the lower half in the set, it could be the average of two middle numbers if set size is even number, otherwise it is the only middle one. As is introduced in [37], K-medoids is more robust compared with the K-means algorithm because it reduces the influence from outlier and noise; but the time complexity is $O(k(n-k)^2)$, $k$ is the number of clusters, $n$ is is the number
+of objects, so it is high complexity. In [39], the author gives us a method to speed up the K-medoids algorithm, so that the time complexity could be reduced to $O(n^2)$.
+
+There are many versions about K-medoids clustering, such as the algorithm uses Voronoi iteration [38], but the most common one is the Partition Around Medoid algorithm (PAM), the basic idea of PAM clustering is below:
+
+\textbf{Partition Around Medoid}: Get clusters by K-medoids clustering
+
+\textbf{Input}: K: the number of clusters; D: the dataset of n objects
+
+\textbf{Output}: K clusters
+
+\textbf{Algorithm}:
+
+\begin{enumerate}
+    \item Randomly select K medoids to initialize K clusters
+    \item Assign each object to the cluster that has the minimum distance between the object and medoid
+    \item While the cost of the configuration decreases:
+    \begin{enumerate}
+        \item For each medoid m and each non-medoid object o:
+        \item Swap m and o, map each object to the closest medoid, recompute the cost (Sum of the distance of objects to their medoid)
+        \item If the total cost of the configuration increased in the previous step, then undo the swap.
+    \end{enumerate}
+\end{enumerate}
+
+
 \subsubsection{Affinity Propagation}
 Afinity propagation (AP) is a centroid based clustering algorithm similar to k Means or K medoids, which does not require the estimation of the number of clusters before running the algorithm. Affinity propagation finds “exemplars” i.e. members of the input set that are representative of clusters.
 Both similarities and preferences are often represented through a single matrix, where the values on the main diagonal represent preferences. Matrix representation is good for dense datasets. Where connections between points are sparse, it is more practical not to store the whole n x n matrix in memory, but instead keep a list of similarities to connected points. Behind the scene, ‘exchanging messages between points’ is the same thing as manipulating matrices, and it’s only a matter of perspective and implementation.
@@ -209,13 +303,49 @@ Finally, we can have different stopping criteria to terminate the procedure, suc
 We’ve seen that with K-Means and similar algorithms, deciding the number of clusters can be tricky. With AP, we don’t have to explicitly specify it, but it may still need some tuning if we obtain either more or less clusters than we may find optimal. Luckily, just by adjusting the preferences we can lower or raise the number of clusters. Setting preferences to a higher value will lead to more clusters, as each point is ‘more certain’ of its suitability to be an exemplar and is therefore harder to ‘beat’ and include it under some other point’s ‘domination’. Conversely, setting lower preferences will result in having less clusters; as if they’re saying “no, no, please, you’re a better exemplar, I’ll join your cluster”. As a general rule, we may set all preferences to the median similarity for a medium to large number of clusters, or to the lowest similarity for a moderate number of clusters. However, a couple of runs with adjusting preferences may be needed to get the result that exactly suits our needs.
 \subsubsection{Hierarchical Clustering}
 Some clustering algorithms such as k-means clustering [23] require a constant value (k as input) for the number of clusters prior to execution. The main issue with such algorithms is the unknown nature of data. In a real-world problem, one normally does not expect to have a precise knowledge of how the data is spread out across the space in advance. Therefore, it is a very strong assumption to expect the number of clusters in advance. In contrast, hierarchical clustering algorithms [13] try to tackle these issues by introducing a different view of how clusters can be constructed. Such algorithms usually require a measure of dissimilarity among clusters.
+
 As the name suggests, hierarchical clustering algorithms produce a hierarchical representation of the data. Such hierarchical data representations are normally stored in a tree data structure. Each node of the tree is considered to be a cluster. The root of the tree is at the highest level and it contains all the elements. The root of the tree can be viewed as a single cluster. Each internal node of the tree contains children and each child can be interpreted as a single cluster. Assuming that the entire dataset is given in advance, there are two basic strategies:
-•	Agglomerative (bottom-up)
-•	Divisive (top-down)
+
+\begin{itemize}
+    \item Agglomerative (bottom-up)
+    \item Divisive (top-down)
+\end{itemize}
+
 The agglomerative approach starts at the bottom of the tree. Each object is inserted to a leaf node representing a single cluster containing a single object. The algorithm proceeds by merging similar object by constructing internal nodes containing several nodes from the previous level. This is done recursively until there is a single node which defines the root of the tree.
+
 The divisive approach works is opposite direction. Unlike the agglomerative approach, the divisive approach starts off by creating the root of the tree. The algorithm continues by dividing the entire dataset into two subsets of similar objects. This approach is also recursive. The recursion continues until the division process reaches a subset with a single node. 
 
+In this section, we focus on HAC (Hierarchical Agglomerative Clustering) as an example of the hierarchical clustering algorithm. The main idea is to give some insight of how such algorithms are designed. This is also beneficial because the reader will have an idea of what these tree data structures may look like. Assuming that we are given a dataset with $n$ objects to cluster. HAC starts by creating a cluster for each object and then it performs $n - 1$ merges. At each step, the two most similar clusters are merged together. These merges form new internal nodes of the tree containing more objects. Notice that when two nodes are being merged together, the algorithm needs to have a dissimilarity measurement between clusters. This means that the distance function is not enough. However, the cluster dissimilarity measure is derived from the provided distance function. HAC clustering may use one of the following common flavors of dissimilarity measurements:
+\begin{itemize}
+    \item Single Linkage
+    \item Complete Linkage
+    \item Average Linkage
+    \item Ward Linkage
+\end{itemize}
 
+The dissimilarity measurement is a derivation of distance function. Let $G$ and $H$ be two clusters, the single linkage (SL) measurement is the least distance between any two objects, $g \in G$ and $h \in H$:
+\begin{equation} \label{eq14}
+    d_{SL}(G, H) = \min_{\substack{g \in G \\ h \in H}}d(g,h)
+\end{equation}
+
+The complete linkage (CL) is the opposite of single linkage: complete linkage is the maximum distance betweenany two objects, $g \in G$ and $h \in H$:
+\begin{equation} \label{eq15}
+    d_{CL}(G, H) = \max_{\substack{g \in G \\ h \in H}}d(g,h)
+\end{equation}
+
+The avarage linkage (AL) is the average between groups:
+\begin{equation} \label{eq16}
+    d_{AL}(G, H) = \frac{1}{|G| \times |H|}\sum_{g \in G}\sum_{h \in H}d(g,h)
+\end{equation}
+
+Finally, in the ward linkage (WL) for each cluster a error function is defined. This error function is the average distance of each datapoint in a cluster to the center of gravity in the cluster:
+\begin{equation} \label{eq17}
+    d_{WL}(G, H) = \frac{n_Gn_H}{n_G + n_H}||\vec{m}_G - \vec{m}_H||^2
+\end{equation}
+
+The one we choose to use is called Ward Linkage. Unlike the others. Instead of measuring the distance directly, it analyzes the variance of clusters. Ward’s is said to be the most suitable method for quantitative variables.
+
+Where $\vec{m}_j$ is the center of cluster $j$, and $n_j$ is the number of points in it.
 % Two common styles, pick one or find alternate bst.
 % \citet{john} is like John (1985); \citep{jane} is like (Jane 1985)
 %\bibliographystyle{IEEEtranN} % Like this (Jane 1995)

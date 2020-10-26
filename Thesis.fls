@@ -40,6 +40,8 @@ INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/amsmath/amsopn.sty
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/amsmath/amsopn.sty
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/setspace/setspace.sty
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/setspace/setspace.sty
+INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/tocloft/tocloft.sty
+INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/tocloft/tocloft.sty
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/base/inputenc.sty
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/base/inputenc.sty
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/vmargin/vmargin.sty
@@ -134,7 +136,9 @@ OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.out
 OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/titlepage.aux
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecrm1728.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1728.tfm
-INPUT /usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.toc
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.toc
+INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
@@ -146,9 +150,21 @@ INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.toc
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
+OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
+INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm
+INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx2488.tfm
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.equ
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.equ
+OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.equ
+INPUT /usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
-INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Euclidean.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Euclidean.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Euclidean.png
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.bbl
