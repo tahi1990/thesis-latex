@@ -67,8 +67,24 @@
 \section{Introduction}
 The growing use of GPS receivers and WIFI embedded mobile devices equipped with hardware for storing data enables us to collect a very large amount of data, that has to be analyzed in order to extract any relevant information. The complexity of the extracted data makes it a difficult challenge. Trajectory clustering is an appropriate way of analyzing trajectory data, and has been applied to pattern recognition, data analysis, machine learning, etc. Additionally, trajectory clustering is used to gather temporal spatial information in the trajectory data and is widespread used in many application areas, such as motion prediction \citep{chen2010searching} and traffic monitoring \citep{atev2006learning}
 
-Trajectory data is recorded in different formats depending on the type of device, object motion, or even purpose. In certain specific circumstances, other object-related properties such as direction, velocity or geographical information are added \citep{ying2011semantic,ying2010mining}. This kind of multidimensional data is prevalent in many fields and applications, for example, to understand migration patterns by studying trajectories of animals, predict meteorology with hurricane data, improve athlete’s performance, etc. Given different types of analysis tasks and moving object data applications, calculating the distance between moving object trajectories is a common technique for most tasks and applications. Therefore, distances are a fundamental component of those tasks and applications of trajectory analysis, allowing us to determine effectively how close two trajectories are. Unlike other simple data types, however, such as ordinal variables or geometric points where the distance description is straightforward, the distance between the trajectories must be carefully defined to represent the true underlying distance. It is because trajectories are basically high-dimensional data attached to both spatial and temporal attributes which need to be considered for distance measurements. As such the literature contains dozens of distance measurements for trajectory data. For example, distance measurements measure the sequence-only distance between trajectories, such as Euclidean distance and Dynamic Time Wrapping Distance (DTW); there are trajectory distance measurements measure both spatial and temporal dimensions of two trajectories as well.
+Trajectory data is recorded in different formats depending on the type of device, object motion, or even purpose. In certain specific circumstances, other object-related properties such as direction, velocity or geographical information are added \citep{ying2011semantic,ying2010mining}. This kind of multidimensional data is prevalent in many fields and applications, for example, to understand migration patterns by studying trajectories of animals, predict meteorology with hurricane data, improve athlete’s performance, etc. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Trajectories.png}
+    \caption{Trajectories with varying lengths}
+    \label{fig1}
+\end{figure}
+
+Given different types of analysis tasks and moving object data applications, calculating the distance between moving object trajectories is a common technique for most tasks and applications. Therefore, distances are a fundamental component of those tasks and applications of trajectory analysis, allowing us to determine effectively how close two trajectories are. Unlike other simple data types, however, such as ordinal variables or geometric points where the distance description is straightforward, the distance between the trajectories must be carefully defined to represent the true underlying distance. It is because trajectories are basically high-dimensional data attached to both spatial and temporal attributes which need to be considered for distance measurements. As such the literature contains dozens of distance measurements for trajectory data. For example, distance measurements measure the sequence-only distance between trajectories, such as Euclidean distance and Dynamic Time Wrapping Distance (DTW); there are trajectory distance measurements measure both spatial and temporal dimensions of two trajectories as well.
 In order to extract useful patterns from high-volume trajectory data, different methods, such as clustering and classification, are usually used. Clustering is an unsupervised learning method that combines data in groups (clusters) based on distance \citep{han2011data,xu2005survey}. The aim of trajectory clustering is to categorize trajectory datasets in cluster groups based on their movement characteristics. The trajectories existing in each cluster have similar characteristics of movement or behavior within the same cluster and are different from the trajectories in other clusters \citep{berkhin2006survey,besse2015review,yuan2017review}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{Cluster Methods.png}
+    \caption{Clustering Methods}
+    \label{fig2}
+\end{figure}
 
 In general, two main approaches can be used for clustering complex data such as trajectories. First, identify trajectory-specific clustering algorithms and second, use generic clustering algorithms that use trajectory-specific distance functions (DFs). One of the most suitable clustering methods for trajectories is density-based clustering \citep{kriegel2011density} which can extract clusters with arbitrary shape and is also tolerant against outliers \citep{ester1996density}. Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is one of the most popular methods among this family, which is widely employed in trajectory clustering \citep{zhao2019trajectory,cheng2018density,chen2011clustering,lee2007trajectory}. Measurement of similarity is the central focus of the clustering problem; thus, similarity (inverse distance) should be calculated prior to grouping. Distance definition in spatial trajectories is much more complicated than point data. Trajectories are sequences of points in several dimensions that are not of the same length. Thus, in order to compare two trajectories, a comprehensive approach is needed to fully determine their distance. Depending on the analysis purpose and also the data type, different DFs are presented. The concept of similarity is domain specific, so different DFs is defined in order to address different aspects of similarity such as spatial, spatio-temporal, and temporal. Spatial similarity is based on spatial parameters like movement path and its shape whereas spatio-temporal similarity is based on movement characteristics like speed, and temporal similarity is based on time intervals and movement duration. For instance, in order to extract the movement patterns in trajectories like detecting the transportation mode, besides the trajectory’s geometry, their movement parameters should also be considered. Among all defined Distance Functions so far, Euclidean, Fréchet, Hausdorff, DTW, LCSS, EDR, and ERP distances are the basic functions in similarity measurements from which so many other functions are generated \citep{abbaspour2017method,aghabozorgi2015time,wang2013effectiveness}.
 
@@ -78,7 +94,14 @@ A trajectory is a sequence of time-stamped point records describing the motion h
 Theoretically, a trajectory should be a continuous record, i.e., a continuous function of time mathematically, since the object movement is continuous in nature. In practice, however, the continuous location record for a moving object is usually not available since the positioning technology (e.g., GPS devices, road-side sensors) can only collect the current position of the moving object in a periodic manner. Due to the intrinsic limitations of data acquisition and storage devices such inherently continuous phenomena are acquired and stored (thus, represented) in a discrete way. This subsection starts with approximations of object trajectories. Intuitively, the more data about the whereabouts of a moving object is available, the more accurate its true trajectory can be determined.
 
 \subsection{Characteristics}
-Trajectories are usually treated as multidimensional (2D or 3D in most cases) time series data; hence existing distance measures for 1D time series (e.g., stock market data) can be applied directly or with minor extension. Typical examples include the distance measures based on DTW, Edit distance and Longest Common Subsequence (LCSS), which were originally designed for traditional time series but now have been extensively adopted for trajectories. However, with the more widely applicability and deeper understanding of trajectory data, it turns out that trajectories are not simply multidimensional extensions of time series but have some unique characteristics to be taken into account during the design of effective distance measures. We summarize them below.
+Trajectories are usually treated as multidimensional (2D or 3D in most cases) time series data as in \autoref{fig3}; hence existing distance measures for 1D time series (e.g., stock market data) can be applied directly or with minor extension. Typical examples include the distance measures based on DTW, Edit distance and Longest Common Subsequence (LCSS), which were originally designed for traditional time series but now have been extensively adopted for trajectories. However, with the more widely applicability and deeper understanding of trajectory data, it turns out that trajectories are not simply multidimensional extensions of time series but have some unique characteristics to be taken into account during the design of effective distance measures. We summarize them below.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{Trajectory.png}
+    \caption{Trajectory with GPS points}
+    \label{fig3}
+\end{figure}
 
 \textbf{Asynchronous observations}. Time series databases usually have a central and synchronized mechanism, by which all the data points can be observed and reported to the central repository simultaneously in a controlled manner. For example, in the stock market, the data of all stocks, such as trade price and amount, are reported every 5 seconds simultaneously. In this way, the data points of the stock time series are synchronized, which makes the comparison of two stock data relatively simple. It just needs to compare the pairs of values reported at the same time instant. However, in trajectory databases there is usually no such mechanism to control the timing of collecting location data. Moving objects, such as GPS embedded vehicles, may have different strategies when they need to report their locations to a central repository, such as time-based, distance-based and prediction-based strategies. Even worse, they might suspend the communication with a central server for a while and resume later. The overall result is that the lengths and timestamps of different trajectories are not the same.
 
@@ -90,16 +113,23 @@ Trajectories are usually treated as multidimensional (2D or 3D in most cases) ti
 There are many ways to define how close two objects are far one from another. A trajectory distance measure is a method that evaluates the distance between two trajectories. $d(T_{1},T_{2})$ denotes the distance between two trajectories $T_{1}\,and\,T_{2}$. The larger the value is, the less similar the two trajectories are. Distances can be classified into two categories: those whose compare trajectories as sequences consider the spatial attribute only (Shape-based distance) and those consider both spatial and temporal information (Warping based distance). Spatial information means the sequence order of trajectory. Temporal information is time-related information.
 
 \subsection{Warping based distance}
-Euclidean distance was the most used distance, but it cannot obtain better accuracy when the local time shifts or when those trajectories lack the same length. In order to improve the accuracy of similarity measurement, the dynamic time warping algorithm (DTW), longest common subsequence algorithm (LCSS), EDR and ERP. These distances are defined the same way, but they use different cost functions. Firstly, these distance measures find all the sample point match pairs among the two compared trajectories $T_{1}\,and\,T_{2}$. A sample point match pair, $pair(p_{i},p_{j})$, is formed by two sample points where $p_{i} \in T_{1}$ and $p_{j} \in T_{2}$. There are several sample point matching strategies such as minimal Euclidean distance or minimal transformation cost. Then these distance measures accumulate the distance for matched pairs or count the number of match pairs to get the final distance results. Thus, the sample point matching strategy is the key for every discrete sequence-only distance measure. The sample point matching strategies can be divided into the following two types:
+Euclidean distance was the most used distance, but it cannot obtain better accuracy when the local time shifts or when those trajectories lack the same length. In order to improve the accuracy of similarity measurement, the dynamic time warping algorithm (DTW), longest common subsequence algorithm (LCSS), EDR and ERP. These distances are defined the same way, but they use different cost functions. Firstly, these distance measures find all the sample point match pairs among the two compared trajectories $T_{1}$ and $T_{2}$. A sample point match pair, $pair(p_{i},p_{j})$, is formed by two sample points where $p_{i} \in T_{1}$ and $p_{j} \in T_{2}$. There are several sample point matching strategies such as minimal Euclidean distance or minimal transformation cost. Then these distance measures accumulate the distance for matched pairs or count the number of match pairs to get the final distance results. Thus, the sample point matching strategy is the key for every discrete sequence-only distance measure. The sample point matching strategies can be divided into the following two types:
 
-\textbf{Complete match}: For two compared trajectories $T_{1}\,and\,T_{2}$, complete match strategy requires every sample point of $T_{1}\,and\,T_{2}$ should be in a match pair, as shown in Figure 2(a). Thus, the match pair number of complete matches is $\max(size(T_{1}),size(T_{2})$.
+\textbf{Complete match}: For two compared trajectories $T_{1}$ and $T_{2}$, complete match strategy requires every sample point of $T_{1}$ and $T_{2}$ should be in a match pair, as shown in \autoref{fig4}(a). Thus, the match pair number of complete matches is $\max(size(T_{1}),size(T_{2})$.
 
-\textbf{Partial match}: For two compared trajectories $T_{1}\,and\,T_{2}$, partial match strategy does not require every sample point of $T_{1}\,and\,T_{2}$ should be in a match pair, as shown in Figure 2(b). Thus, some sample points will not be matched to any sample points.
+\textbf{Partial match}: For two compared trajectories $T_{1}\,and\,T_{2}$, partial match strategy does not require every sample point of $T_{1}\,and\,T_{2}$ should be in a match pair, as shown in \autoref{fig4}(b). Thus, some sample points will not be matched to any sample points.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Matching Methods.png}
+    \caption{Matching Methods \citep{su2020survey}}
+    \label{fig4}
+\end{figure}
 
 \subsubsection{Euclidean distance}
 Euclidean distance is the most commonly adopted distance measures that pair-wisely computes the distance between corresponding points of two trajectories. Besides being relatively straightforward and intuitive, Euclidean distance and its variants have several other advantages. The complexity of evaluating these measures is linear; in addition, they are easy to implement, indexable withany access method, and parameter free. Euclidean distance was proposed as a distance measure between time series and was once considered as one of the most widely used distance functions since the 1960s \citep{keogh2000scaling,faloutsos1994fast,pfeifer1980three,priestley1980state}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\textwidth]{Euclidean.png}
     \caption{Euclidean distance}
@@ -113,7 +143,15 @@ For two trajectories $T_{1}\,and\,T_{2}$, the Euclidean distance $d_{Euclidean}(
 Where $p_{1,i}$ and $p_{2,i}$ are the ith sample point of $T_{1}$ and $T_{2}$ respectively. The time complexity is $O(n)$. Euclidean distance measure is straightforward; however, it requires the comparing trajectories to be the same size, which is not common in the actual situation; otherwise it will fail to decide the match pairs of the trajectories to be compared.
 
 \subsubsection{DTW}
-\textit{Dynamic time warping} (DTW) is an algorithm for measuring the distance between two sequences. DTW has existed for over a hundred years. Initially, DTW was introduced to compute the distance of time series \citep{myers1980performance}. In 1980s, DTW was introduced to measure trajectory distance \citep{kruskal1983overview} and has become one of the most popular trajectory distance measure since then. DTW distance is defined in a recursive manner and can be easily applied in dynamic programming. It searches through all possible points’alignment between two trajectories for the one with minimal distance. Specifically, the DTW $d_{DTW} (T_{1},T_{2})$ between two trajectories $T_{1}\,and\,T_{2}$ with lengths of $n\,and\,m$ is defined as:
+\textit{Dynamic time warping} (DTW) is an algorithm for measuring the distance between two sequences. DTW has existed for over a hundred years. Initially, DTW was introduced to compute the distance of time series \citep{myers1980performance}. In 1980s, DTW was introduced to measure trajectory distance \citep{kruskal1983overview} and has become one of the most popular trajectory distance measure since then. DTW distance is defined in a recursive manner and can be easily applied in dynamic programming. It searches through all possible points’alignment between two trajectories for the one with minimal distance. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{DTW.png}
+    \caption{DTW distance}
+\end{figure}
+
+Specifically, the DTW $d_{DTW} (T_{1},T_{2})$ between two trajectories $T_{1}$ and $T_{2}$ with lengths of $n$ and $m$ is defined as:
 \begin{equation} \label{eq2}
     d_{DTW} (T_{1},T_{2}) = \begin{cases}
                                 0, if\:n\:=\:0\:and\:m\:=\:0 \\
@@ -121,16 +159,34 @@ Where $p_{1,i}$ and $p_{2,i}$ are the ith sample point of $T_{1}$ and $T_{2}$ re
                                 d(Head(T_{1}), Head(T_{2})) + min\{d_{DTW}(T_{1}, Rest(T_{2})), \\ d_{DTW}(Rest(T_{1}), T_{2}), d_{DTW}(Rest(T_{1}), Rest(T_{2}) \} \: otherwise
                             \end{cases}
 \end{equation}
+\myequations{DTW distance}
 The time complexity of DTW is $O(mn)$.
 
 \subsubsection{LCSS}
-\textit{Longest common subsequence} (LCSS) and edit distance-based distance measures are the mainly used distance metrics of partial match measures. LCSS is a traditional similarity metric for strings, which is to find the longest subsequence com-mon to two compared strings. The value of LCSS similarity between sequences $S_{1}\,and\,S_{2}$ stands for the size of the longest common subsequence of $S_{1}\,and\,S_{2}$. Trajectory can be treated as a sequence of sample points, so LCSS was used to measure the similarity between trajectories. The value of LCSS similarity between trajectories $T_{1}\,and\,T_{2}$ stands for the size of the longest common subsequence of $T_{1}\,and\,T_{2}$. However, it can hardly find any two sample points with the exact same location information. Thus, in measuring the similarity of trajectories $T_{1}\,and\,T_{2}$, LCSS treats $p_{i}\,(p_{i} \in T_{1})\,and\,p_{j}\,(p_{j} \in T_{2})$ to be the same as long as the distance between $p_{i}\,and\,p_{j}$, which is less than a threshold $\epsilon$. Thus, some sample points of $T_{1}\,and\,T_{2}$ cannot be in any match pairs. Then LCSS distance simply counts the number of match pairs between $T_{1}\,and\,T_{2}$. Since the sample points far apart do not contribute to the value of LCSS distance, these sample points do not have match points. In contrast to Euclidean distance, LCSS is robust to noise. LCSS distance between trajectories is defined as:
+\textit{Longest common subsequence} (LCSS) and edit distance-based distance measures are the mainly used distance metrics of partial match measures. LCSS is a traditional similarity metric for strings, which is to find the longest subsequence com-mon to two compared strings. The value of LCSS similarity between sequences $S_{1}\,and\,S_{2}$ stands for the size of the longest common subsequence of $S_{1}\,and\,S_{2}$. Trajectory can be treated as a sequence of sample points, so LCSS was used to measure the similarity between trajectories. The value of LCSS similarity between trajectories $T_{1}\,and\,T_{2}$ stands for the size of the longest common subsequence of $T_{1}\,and\,T_{2}$. However, it can hardly find any two sample points with the exact same location information. Thus, in measuring the similarity of trajectories $T_{1}\,and\,T_{2}$, LCSS treats $p_{i}\,(p_{i} \in T_{1})\,and\,p_{j}\,(p_{j} \in T_{2})$ to be the same as long as the distance between $p_{i}\,and\,p_{j}$, which is less than a threshold $\epsilon$. Thus, some sample points of $T_{1}\,and\,T_{2}$ cannot be in any match pairs. Then LCSS distance simply counts the number of match pairs between $T_{1}\,and\,T_{2}$. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{LCSS.png}
+    \caption{LCSS distance}
+\end{figure}
+
+Since the sample points far apart do not contribute to the value of LCSS distance, these sample points do not have match points. In contrast to Euclidean distance, LCSS is robust to noise. LCSS distance between trajectories is defined as:
 \begin{equation} \label{eq3}
     d_{LCSS}(T_{1}, T_{2}) = size(T_{1}) + size(T_{2}) - 2s_{LCSS}(T_{1},T_{2})
 \end{equation}
+\myequations{LCSS distance}
 
 \subsubsection{EDR}
-\textit{Edit Distance on Real sequence} (EDR) is an ED-based trajectory distance measure. The EDR distance $d_{EDR}(T_{1},T_{2})$ between two trajectories $T_{1}\,and\,T_{2}$ with lengths of $n\,and\,m$ respectively is the number of edits (insertion, deletion, or substitutions) needed to change $T_{1}\,and\,T_{2}$. Similar to LCSS, it can hardly find any two sample points with exactly the same location information. To measure the distance of trajectories $T_{1}\,and\,T_{2}$, EDR treats $p_{i}\,(p_{i} \in T_{1})\,and\,p_{j}\,(p_{j} \in T_{2})$ the same only if the locations of $p_{i}\,and\,p_{j}$ are within a range $\epsilon$. The distance $d_{EDR}(T_{1},T_{2})$ is defined as:
+\textit{Edit Distance on Real sequence} (EDR) is an ED-based trajectory distance measure. The EDR distance $d_{EDR}(T_{1},T_{2})$ between two trajectories $T_{1}\,and\,T_{2}$ with lengths of $n\,and\,m$ respectively is the number of edits (insertion, deletion, or substitutions) needed to change $T_{1}\,and\,T_{2}$. Similar to LCSS, it can hardly find any two sample points with exactly the same location information. To measure the distance of trajectories $T_{1}\,and\,T_{2}$, EDR treats $p_{i}\,(p_{i} \in T_{1})\,and\,p_{j}\,(p_{j} \in T_{2})$ the same only if the locations of $p_{i}\,and\,p_{j}$ are within a range $\epsilon$. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{EDR.png}
+    \caption{EDR distance}
+\end{figure}
+
+The distance $d_{EDR}(T_{1},T_{2})$ is defined as:
 \begin{equation} \label{eq4}
     d_{EDR}(T_{1}, T_{2}) = \begin{cases}
                                 n, if \:m\:=\:0 \\
@@ -141,38 +197,67 @@ The time complexity of DTW is $O(mn)$.
                                 \}, otherwise
                             \end{cases}
 \end{equation}
-Similar to LCSS, EDR is robust to noisy trajectory data. The disadvantage of EDR is that the distance value of EDR heavily relies on the parameter $\epsilon$, which is not easy for users to adjust; a not well adjusted $\epsilon$ may cause inaccuracy. The time complexity of EDR is $O(mn)$.
+\myequations{EDR distance}
+Similar to LCSS, EDR is robust to noisy trajectory data. The disadvantage of EDR is that the distance value of EDR heavily relies on the parameter $\epsilon$, which is not easy for users to adjust; a not well adjusted $\epsilon$ may cause inaccuracy. 
+
+The time complexity of EDR is $O(mn)$.
 
 \subsubsection{ERP}
-\textit{Edit distance with Real Penalty} (ERP) is a trajectory distance measure that combines Lp-norm and edit distance. As introduced above, Euclidean distance and DTW both use Lp-norm for measuring the distance between trajectories. However, they require every sample point to be in a match pair. ERP uses the edit-distance-like sample point matching method. In edit distance, there are 3 operations, i.e., addition, deletion and substitution. Thus, when a substitution operation happens on a sample point $p_{i}$ from $T_{1}$ for transforming $T_{1}\,to\,T_{2}$, there must be a counterpart $p_{j}$ from $T_{2}$ and ERP treats $p_{i}\,and\,p_{j}$ as a match pair. When an addition operation happens, $p_{j}$ is added to $T_{1}$ for transforming $T_{1}$ to $T_{2}$. ERP treats $p_{j}$ to be matched to an empty point, namely gap. When a deletion operation happens, $p_{i}$ is deleted from $T_{1}$ for transforming $T_{1}\,to\,T_{2}$, and ERP treats $p_{i}$ to be matched to a gap. The distance $d_{ERP}(T_{1},T_{2})$ is defined as:
-\begin{equation} \label{eq5}
-    d_{ERP}(T_{1},T_{2}) = 
-\end{equation}
+\textit{Edit distance with Real Penalty} (ERP) is a trajectory distance measure that combines Lp-norm and edit distance. As introduced above, Euclidean distance and DTW both use Lp-norm for measuring the distance between trajectories. However, they require every sample point to be in a match pair. ERP uses the edit-distance-like sample point matching method. In edit distance, there are 3 operations, i.e., addition, deletion and substitution. Thus, when a substitution operation happens on a sample point $p_{i}$ from $T_{1}$ for transforming $T_{1}\,to\,T_{2}$, there must be a counterpart $p_{j}$ from $T_{2}$ and ERP treats $p_{i}\,and\,p_{j}$ as a match pair. When an addition operation happens, $p_{j}$ is added to $T_{1}$ for transforming $T_{1}$ to $T_{2}$. ERP treats $p_{j}$ to be matched to an empty point, namely gap. When a deletion operation happens, $p_{i}$ is deleted from $T_{1}$ for transforming $T_{1}\,to\,T_{2}$, and ERP treats $p_{i}$ to be matched to a gap. 
+% The distance $d_{ERP}(T_{1},T_{2})$ is defined as:
+% \begin{equation} \label{eq5}
+%     d_{ERP}(T_{1},T_{2}) = 
+% \end{equation}
 
 \subsection{Shape based distance}
 These distances try to catch geometric features of the trajectories, in particular, their shape instead of matching the trajectory sample points directly. This means trajectories are clustered independently of their location and of a global change of scale. The Hausdorff distance and Fréchet distance are the most well-known distance.
 
 \subsubsection{Fréchet distance}
-The Fréchet distance is a measure of similarity between curves that takes into account the location and ordering of the points along the curves. The Fréchet distance between the two curves is the length of the shortest leash sufficient for both to traverse their separate paths. Let $T_{1}\,and\,T_{2}$ be two trajectories which can be represented as two continuous functions $f_{1}\,and\,f_{2}$ over time $t$, where the starting time and end time of time period $t$ are denoted by $t.start$ and $t.end$ respectively. The Fréchet distance between $T_{1}\,and\,T_{2}$ is defined as the infimum over all reparameterizations $f_{1}(t)$ and $f_{2}(t)$. The Fréchet distance algorithm is shown below:
+The Fréchet distance is a measure of similarity between curves that takes into account the location and ordering of the points along the curves. The Fréchet distance between the two curves is the length of the shortest leash sufficient for both to traverse their separate paths. Let $T_{1}\,and\,T_{2}$ be two trajectories which can be represented as two continuous functions $f_{1}\,and\,f_{2}$ over time $t$, where the starting time and end time of time period $t$ are denoted by $t.start$ and $t.end$ respectively. The Fréchet distance between $T_{1}\,and\,T_{2}$ is defined as the infimum over all reparameterizations $f_{1}(t)$ and $f_{2}(t)$. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Frechet.png}
+    \caption{Fréchet distance}
+\end{figure}
+
+The Fréchet distance algorithm is shown below:
 \begin{equation} \label{eq6}
     d_{Frechet}(T_{1},T_{2}) = infmax_{t in [t.start, t.end]} \{d(f_{1}(t), f_{2}(t))\}
 \end{equation}
-The time complexity of Fréchet distance is $O(mn)$. Since its value is the longest distance between two trajectories at the same time, a noisy point is always far away from a trajectory, causing Fréchet distance to be very sensitive to noise.
+\myequations{Fréchet distance}
+Since its value is the longest distance between two trajectories at the same time, a noisy point is always far away from a trajectory, causing Fréchet distance to be very sensitive to noise.
+
+The time complexity of Fréchet distance is $O(mn)$. 
 
 \subsubsection{Hausdorff distance}
 The Hausdorff distance is a metric. It measures the distance between two sets of metric spaces. Informally, two sets are close in the Hausdorff distance if every point of either set is close to some point of the other set. The Hausdorff distance is the longest distance you can be forced to travel by an adversary who chooses a point in one of two sets, from where you then must travel to other set. In other words, it is the greatest of all the distances from a point in one set to the closest point in the other set.
 
+The Hausdorff distance algorithm is shown below:
+\begin{equation} \label{eq7}
+    d_{Hausdorff}(T_{1},T_{2}) = max \{ \sup_{x \in X} \inf_{y \in Y} d(x, y), \sup_{y \in Y} \inf_{x \in X} d(x, y) \}
+\end{equation}
+\myequations{Hausdorff distance}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Hausdorff.png}
+    \caption{Hausdorff distance}
+\end{figure}
+
+The time complexity of Fréchet distance is $O(mn)$. 
+
 \subsubsection{Symmetrized Segment-Path Distance (SSPD)}
 This distance is a shaped based distance. The Segment-Path distance from trajectory $T_{1}$ to $T_{2}$ is the mean of all distances from points composing $T_{1}$ to trajectory $T_{2}$.
-\begin{equation} \label{eq7}
+\begin{equation} \label{eq8}
     d_{SPD}(T_{1},T_{2}) = \frac{1}{n} \sum_{i_{1}=1}^{n_{1}}D_{pt}(p_{i_{1}}^1, T_{2})
 \end{equation}
 Where
-\begin{equation} \label{eq8}
+\begin{equation} \label{eq9}
     D_{pt}(p_{i_{1}}^1, T_{2}) = min_{i_{2} \in [0,\dots,n_{2}-1]}D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2)
 \end{equation}
 And $D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2)$ is \textit{Point-to-Segment distance}:
-\begin{equation} \label{eq9}
+\begin{equation} \label{eq10}
     D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2) = \begin{cases}
                                             n \\
                                             min, otherwise 
@@ -181,7 +266,7 @@ And $D_{ps}(p_{i_{1}}^1, s_{i_{2}}^2)$ is \textit{Point-to-Segment distance}:
 The distance between $x$ and a segment $s$ is the shortest distance between x and any points of the segment.
 
 The \textit{Symmetrized Segment-Path Distance} is defined as:
-\begin{equation} \label{eq10}
+\begin{equation} \label{eq11}
     D_{SSPD}(T_{1}, T_{2}) = \frac{D_{SPD}(T_{1}, T_{2}) + D_{SPD}(T_{2}, T_{1})}{2}
 \end{equation}
 
@@ -205,20 +290,20 @@ C-SIM algorithm was proposed by \cite{mariescu2017grid} to compute similarity be
 
 \textbf{Points-to-Cells}: Finding the set of Cells that approximate a given trajectory. \cite{mariescu2017grid} used a hashing method to keep track of cells already existing in the representation. With 25×25-meter-sized cells, a 100×100 km square results in a grid of size 4,000×4,000 cells. A trajectory consists of pairs of Easting and Northing values that passes through the cells. Gaps can appear in the cell representation when user is traveling faster than the cell length divided by sampling interval, or when user moves and the device fails to update the location or for some other reasons. The cells were generated in the order that the trajectory points were recorded; if two consecutively generated cells are not adjacent, the gap is filled by using linear interpolation with equation:
 
-\begin{equation} \label{eq11}
+\begin{equation} \label{eq12}
     y = \frac{y_2 - y_1}{x_2 - x_1}(x - x_1) + y_1
 \end{equation}
 where $(x_1, y_1)$ and $(x_2, y_2)$ are the easting and northing values of the two cells inside a 100km square.
 
 \textbf{Intersection}: Jacard index was used to measure amount of similarity. It is calculated as the size of the intersection divided by the size of the union of two sets \citep{mariescu2017grid}:
 
-\begin{equation} \label{eq12}
+\begin{equation} \label{eq13}
     J(C_A, C_B) = \frac{|C_A \cap C_B|}{|C_A \cup C_B|}
 \end{equation}
 
 Each of two trajectories are dilated separately, compute the two intersections with original of the other trajectory as follows:
 
-\begin{equation} \label{eq13}
+\begin{equation} \label{eq14}
     S(C_A, C_B) = \frac{|C_A \cap C_B| + |C_A \cap C_B^d| + |C_B \cap C_A^d|}{|C_A| + |C_B| - |C_A \cup C_B|}
 \end{equation}
 
@@ -237,6 +322,12 @@ The choice of the clustering method is restricted by the characteristics of the 
 \subsubsection{DBSCAN}
 The Densely Clustering models measure how closely points are packed together after given the centroids. Inspired by this idea, Density-based spatial clustering of applications with noise (DBSCAN), which has been widely applied to trajectory clustering is proposed in \citeyear{ester1996density}. The key idea is that for any data vector to belong to a cluster, there must be at least a given number of data vectors within a specified radius. In other words, the density of the neighborhood around the data vector must exceed a given threshold. In general, the shape of the neighborhood depends on the choice of distance function.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{DBSCAN.png}
+    \caption{DBSCAN \citep{su2020survey}}
+\end{figure}
+
 The DBSCAN algorithm \citep{ester1996density, kriegel2011density} takes two global inputs: the radius $r$ and the minimum number of data vectors $k$. Given these two values, the local density of a data vector is defined as the number of data vectors $k_{i}$ that lie within the radius $r$ from the data vector ${x_{i}}$. If the local density is greater than the minimum number of points $k$, then $x_{i}$ is called a core point. The concepts of density-reachability and density-connectivity are the basis for the notion of cluster. \cite{ester1996density} define these as follows: A data vector $p$ is directly density-reachable from another data vector $q$ if the distance between them is shorter than $r$, and $q$ is a core point. A data vector $p$ is density-reachable from a vector $q$ if they are joined by a sequence of data vectors $x_{1},\dots,x_{n}, x_{1}=q, x_{n}=p$ such that the data vector $x_{i+1}$ is directly density-reachable from the data vector $x_{i}$. A data vector $p$ is density-connected to the vector $q$ if there is an intermediate data vector $o$ from which both $p$ and $q$ are density-reachable. Data vectors that are not core points but are part of a cluster but are called border points. Finally, data vectors that do not belong to a cluster are called noise points.
 
 The original DBSCAN algorithm gained widespread popularity becauseit was very efficient for large data sets. According to \cite{kotsiantis2004recent}, DBSCAN out-performs hierarchical and partitioning algorithms. However, this seems to depend on the dimensionality of the data: \cite{kriegel2011density} gives the time complexity of DBSCAN as $O(N^2)$ in the worst case, although they also claim that the average runtime time complexity can be brought down to $O(NlogN)$ if the dimensionality of the data is not too high and R*-trees are used for indexing the data. For comparison, the worst case time complexity of $k-means$ is $O(INK)$, where $I$ is the number of iterations, $N$ is the number of data vectors, and $K$ is the number of clusters. Hierarchical agglomerative clustering can be performed in $O(\tau N^2)$ where $\tau$ is a small number that refers to the number of nearest neighbors that need to be updated after merging clusters \citep{franti2006fast}.
@@ -246,6 +337,12 @@ DBSCAN does not require the number of clusters to be given as a parameter becaus
 High-dimensional data can also make clustering more challenging distances between data vectors become more uniform, effectively making them seem more similar \citep{ertoz2003finding}. Furthermore, choosing the parameters for the distance and density thresholds requires domain expertise, and the definitions of the algorithm such as density-connectivity and border points are not very simple. A simplified version of the DBSCAN algorithm was proposed by \cite{campello2013density} which gets rid of the concept of border points.
 
 These techniques do not require the number of clusters to be given as an input parameter and also do not make any assumptions about the density within the clusters. The basic idea of using DBSCAN for trajectory clustering is that considering a similarity function (such as Euclidean or DTW), each trajectory existing in a cluster should have at least $min T_{r}$ number of trajectories in its neighbourhood within a radius of $Eps$.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{DBSCAN Trajectory Clustering.png}
+    \caption{DBSCAN Trajectory Clustering \citep{su2020survey}}
+\end{figure}
 
 This is basic idea of using DBSCAN in trajectory clustering task according to \cite{moayedi2019evaluation} with trajectory dataset $TD$:
 
@@ -257,7 +354,14 @@ This is basic idea of using DBSCAN in trajectory clustering task according to \c
     \item A cluster $C$ is a non-empty subset of $TD$, for every $T_{p}, T_{q}$: if $T_{p} \in C, T_{q}$ is density-reachable from $T_{p}$ then $T_{q} \in C$ and $T_{p}$ is density-connected to $T_{q}$. A trajectory which is not part of any clusters is defined as an outlier.
 \end{itemize}
 
-A disadvantage of DBSCAN is that it struggles with data sets that contain clusters of varying densities \citep{ertoz2003finding}. An example of this is shown in .... If the chosen distance threshold is too small, all the points belonging to the sparse cluster will be considered noise. If the threshold is too large, all points will be in the same cluster. A possible solution might be to run the algorithm multiple times and removing the already found clusters from the data set after each run.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{DBSCAN disadvantage.png}
+    \caption{The distance threshold $r$ defines the neighborhood of a point. \citep{ertoz2003finding}}
+    \label{fig13}
+\end{figure}
+
+A disadvantage of DBSCAN is that it struggles with data sets that contain clusters of varying densities \citep{ertoz2003finding}. An example of this is shown in \autoref{fig13} If the chosen distance threshold is too small, all the points belonging to the sparse cluster will be considered noise. If the threshold is too large, all points will be in the same cluster. A possible solution might be to run the algorithm multiple times and removing the already found clusters from the data set after each run.
 
 \subsubsection{K-Medoid}
 K-medoids algorithm groups the data based on their distance to each other. Medoid is the representative of a cluster that has the maximum sum of similarity to others in the cluster that has the minimum distance between this object and the medoid.
@@ -291,18 +395,23 @@ There are many versions about K-medoids clustering, such as the algorithm uses V
 Afinity propagation (AP) is a centroid based clustering algorithm similar to k Means or K medoids, which does not require the estimation of the number of clusters before running the algorithm. Affinity propagation finds “exemplars” i.e. members of the input set that are representative of clusters.
 Both similarities and preferences are often represented through a single matrix, where the values on the main diagonal represent preferences. Matrix representation is good for dense datasets. Where connections between points are sparse, it is more practical not to store the whole n x n matrix in memory, but instead keep a list of similarities to connected points. Behind the scene, ‘exchanging messages between points’ is the same thing as manipulating matrices, and it’s only a matter of perspective and implementation.
 The main drawbacks of K-Means and similar algorithms are having to select the number of clusters and choosing the initial set of points. Affinity Propagation, instead, takes as input measures of similarity between pairs of data points, and simultaneously considers all data points as potential exemplars. Real-valued messages are exchanged between data points until a high-quality set of exemplars and corresponding clusters gradually emerges.
+
 As an input, the algorithm requires us to provide two sets of data:
     Similarities between data points, representing how well-suited a point is to be another one’s exemplar. If there’s no similarity between two points, as in they cannot belong to the same cluster, this similarity can be omitted or set to -Infinity depending on implementation.
     Preferences, representing each data point’s suitability to be an exemplar. We may have some a priori information which points could be favored for this role, and so we can represent it through preferences.
+
 The algorithm then runs through a number of iterations, until it converges. Each iteration has two message-passing steps:
-    Calculating responsibilities: Responsibility r(i, k) reflects the accumulated evidence for how well-suited point k is to serve as the exemplar for point i, taking into account other potential exemplars for point i. Responsibility is sent from data point i to candidate exemplar point k.
-    Calculating availabilities: Availability a(i, k) reflects the accumulated evidence for how appropriate it would be for point i to choose point k as its exemplar, taking into account the support from other points that point k should be an exemplar. Availability is sent from candidate exemplar point k to point i.
-In order to calculate responsibilities, the algorithm uses original similarities and availabilities calculated in the previous iteration (initially, all availabilities are set to zero). Responsibilities are set to the input similarity between point i and point k as its exemplar, minus the largest of the similarity and availability sum between point i and other candidate exemplars. The logic behind calculating how suitable a point is for an exemplar is that it is favored more if the initial a priori preference was higher, but the responsibility gets lower when there is a similar point that considers itself a good candidate, so there is a ‘competition’ between the two until one is decided in some iteration.
-Calculating availabilities, then, uses calculated responsibilities as evidence whether each candidate would make a good exemplar. Availability a(i, k) is set to the self-responsibility r(k, k) plus the sum of the positive responsibilities that candidate exemplar k receives from other points.
-Finally, we can have different stopping criteria to terminate the procedure, such as when changes in values fall below some threshold, or the maximum number of iterations is reached. At any point through Affinity Propagation procedure, summing Responsibility (r) and Availability (a) matrices gives us the clustering information we need: for point i, the k with maximum r(i, k) + a(i, k) represents point i’s exemplar. Or, if we just need the set of exemplars, we can scan the main diagonal. If r(i, i) + a(i, i) > 0, point i is an exemplar.
+
+    \textbf{Calculating responsibilities}: Responsibility $r(i, k)$ reflects the accumulated evidence for how well-suited point $k$ is to serve as the exemplar for point $i$, taking into account other potential exemplars for point $i$. Responsibility is sent from data point $i$ to candidate exemplar point $k$.
+
+    \textbf{Calculating availabilities}: Availability $a(i, k)$ reflects the accumulated evidence for how appropriate it would be for point $i$ to choose point $k$ as its exemplar, taking into account the support from other points that point $k$ should be an exemplar. Availability is sent from candidate exemplar point $k$ to point $i$.
+
+In order to calculate responsibilities, the algorithm uses original similarities and availabilities calculated in the previous iteration (initially, all availabilities are set to zero). Responsibilities are set to the input similarity between point $i$ and point $k$ as its exemplar, minus the largest of the similarity and availability sum between point $i$ and other candidate exemplars. The logic behind calculating how suitable a point is for an exemplar is that it is favored more if the initial a priori preference was higher, but the responsibility gets lower when there is a similar point that considers itself a good candidate, so there is a ‘competition’ between the two until one is decided in some iteration.
+Calculating availabilities, then, uses calculated responsibilities as evidence whether each candidate would make a good exemplar. Availability $a(i, k)$ is set to the self-responsibility $r(k, k)$ plus the sum of the positive responsibilities that candidate exemplar $k$ receives from other points.
+Finally, we can have different stopping criteria to terminate the procedure, such as when changes in values fall below some threshold, or the maximum number of iterations is reached. At any point through Affinity Propagation procedure, summing Responsibility (r) and Availability (a) matrices gives us the clustering information we need: for point $i$, the $k$ with maximum $r(i, k) + a(i, k)$ represents point i’s exemplar. Or, if we just need the set of exemplars, we can scan the main diagonal. If $r(i, i) + a(i, i) > 0$, point $i$ is an exemplar.
 We’ve seen that with K-Means and similar algorithms, deciding the number of clusters can be tricky. With AP, we don’t have to explicitly specify it, but it may still need some tuning if we obtain either more or less clusters than we may find optimal. Luckily, just by adjusting the preferences we can lower or raise the number of clusters. Setting preferences to a higher value will lead to more clusters, as each point is ‘more certain’ of its suitability to be an exemplar and is therefore harder to ‘beat’ and include it under some other point’s ‘domination’. Conversely, setting lower preferences will result in having less clusters; as if they’re saying “no, no, please, you’re a better exemplar, I’ll join your cluster”. As a general rule, we may set all preferences to the median similarity for a medium to large number of clusters, or to the lowest similarity for a moderate number of clusters. However, a couple of runs with adjusting preferences may be needed to get the result that exactly suits our needs.
 \subsubsection{Hierarchical Clustering}
-Some clustering algorithms such as k-means clustering [23] require a constant value (k as input) for the number of clusters prior to execution. The main issue with such algorithms is the unknown nature of data. In a real-world problem, one normally does not expect to have a precise knowledge of how the data is spread out across the space in advance. Therefore, it is a very strong assumption to expect the number of clusters in advance. In contrast, hierarchical clustering algorithms [13] try to tackle these issues by introducing a different view of how clusters can be constructed. Such algorithms usually require a measure of dissimilarity among clusters.
+Some clustering algorithms such as k-means clustering \citep{macqueen1967some} require a constant value (k as input) for the number of clusters prior to execution. The main issue with such algorithms is the unknown nature of data. In a real-world problem, one normally does not expect to have a precise knowledge of how the data is spread out across the space in advance. Therefore, it is a very strong assumption to expect the number of clusters in advance. In contrast, hierarchical clustering algorithms [13] try to tackle these issues by introducing a different view of how clusters can be constructed. Such algorithms usually require a measure of dissimilarity among clusters.
 
 As the name suggests, hierarchical clustering algorithms produce a hierarchical representation of the data. Such hierarchical data representations are normally stored in a tree data structure. Each node of the tree is considered to be a cluster. The root of the tree is at the highest level and it contains all the elements. The root of the tree can be viewed as a single cluster. Each internal node of the tree contains children and each child can be interpreted as a single cluster. Assuming that the entire dataset is given in advance, there are two basic strategies:
 
@@ -310,6 +419,12 @@ As the name suggests, hierarchical clustering algorithms produce a hierarchical 
     \item Agglomerative (bottom-up)
     \item Divisive (top-down)
 \end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{AP Clustering.png}
+    \caption{Hierarchical clustering models \citep{bian2019trajectory}}
+\end{figure}
 
 The agglomerative approach starts at the bottom of the tree. Each object is inserted to a leaf node representing a single cluster containing a single object. The algorithm proceeds by merging similar object by constructing internal nodes containing several nodes from the previous level. This is done recursively until there is a single node which defines the root of the tree.
 
@@ -323,29 +438,46 @@ In this section, we focus on HAC (Hierarchical Agglomerative Clustering) as an e
     \item Ward Linkage
 \end{itemize}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{HAC Clustering.png}
+    \caption{HAC clustering \citep{hierarchicaltutorial2017}}
+\end{figure}
+
 The dissimilarity measurement is a derivation of distance function. Let $G$ and $H$ be two clusters, the single linkage (SL) measurement is the least distance between any two objects, $g \in G$ and $h \in H$:
-\begin{equation} \label{eq14}
+\begin{equation} \label{eq15}
     d_{SL}(G, H) = \min_{\substack{g \in G \\ h \in H}}d(g,h)
 \end{equation}
 
 The complete linkage (CL) is the opposite of single linkage: complete linkage is the maximum distance betweenany two objects, $g \in G$ and $h \in H$:
-\begin{equation} \label{eq15}
+\begin{equation} \label{eq16}
     d_{CL}(G, H) = \max_{\substack{g \in G \\ h \in H}}d(g,h)
 \end{equation}
 
 The avarage linkage (AL) is the average between groups:
-\begin{equation} \label{eq16}
+\begin{equation} \label{eq17}
     d_{AL}(G, H) = \frac{1}{|G| \times |H|}\sum_{g \in G}\sum_{h \in H}d(g,h)
 \end{equation}
 
 Finally, in the ward linkage (WL) for each cluster a error function is defined. This error function is the average distance of each datapoint in a cluster to the center of gravity in the cluster:
-\begin{equation} \label{eq17}
+\begin{equation} \label{eq18}
     d_{WL}(G, H) = \frac{n_Gn_H}{n_G + n_H}||\vec{m}_G - \vec{m}_H||^2
 \end{equation}
 
 The one we choose to use is called Ward Linkage. Unlike the others. Instead of measuring the distance directly, it analyzes the variance of clusters. Ward’s is said to be the most suitable method for quantitative variables.
 
 Where $\vec{m}_j$ is the center of cluster $j$, and $n_j$ is the number of points in it.
+
+\pagebreak
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.55\textwidth]{Ward Linkage.png}
+    \caption{Ward Linkage \citep{hierarchicaltutorial2017}}
+\end{figure}
+
+\subsection{Results}
+
 % Two common styles, pick one or find alternate bst.
 % \citet{john} is like John (1985); \citep{jane} is like (Jane 1985)
 %\bibliographystyle{IEEEtranN} % Like this (Jane 1995)
