@@ -151,9 +151,12 @@ INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.toc
-INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
-INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lot
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lot
+OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lot
 INPUT /usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
 OUTPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.lof
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm
 INPUT /usr/local/texlive/2020basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx2488.tfm
@@ -212,6 +215,9 @@ INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/HAC Clustering.
 INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Ward Linkage.png
 INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Ward Linkage.png
 INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Ward Linkage.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Mopsi Trajectories.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Mopsi Trajectories.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images/Mopsi Trajectories.png
 INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.bbl
 INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/Thesis.bbl
 INPUT /usr/local/texlive/2020basic/texmf-dist/tex/latex/base/t1cmtt.fd
