@@ -1,5 +1,15 @@
-\contentsline {myequations}{\numberline {1}Euclidean distance}{7}{equation.3.1}%
-\contentsline {myequations}{\numberline {2}DTW distance}{9}{equation.3.2}%
-\contentsline {myequations}{\numberline {3}LCSS distance}{10}{equation.3.3}%
-\contentsline {myequations}{\numberline {4}Fréchet distance}{12}{equation.3.4}%
-\contentsline {myequations}{\numberline {5}Hausdorff distance}{13}{equation.3.5}%
+\contentsline {myequations}{\numberline {1}Euclidean distance}{6}{equation.3.1}%
+\contentsline {myequations}{\numberline {2}DTW distance}{6}{equation.3.2}%
+\contentsline {myequations}{\numberline {3}LCSS Similarity}{7}{equation.3.3}%
+\contentsline {myequations}{\numberline {4}LCSS Distance}{8}{equation.3.4}%
+\contentsline {myequations}{\numberline {5}Fréchet distance}{9}{equation.3.5}%
+\contentsline {myequations}{\numberline {6}Hausdorff distance}{10}{equation.3.6}%
+\contentsline {myequations}{\numberline {7}C-SIM}{12}{equation.3.7}%
+\contentsline {myequations}{\numberline {8}HC-SIM}{12}{equation.3.8}%
+\contentsline {myequations}{\numberline {9}HC-SIM distance}{13}{equation.3.9}%
+\contentsline {myequations}{\numberline {10}Single Linkage}{19}{equation.4.10}%
+\contentsline {myequations}{\numberline {11}Complete Linkage}{19}{equation.4.11}%
+\contentsline {myequations}{\numberline {12}Average Linkage}{19}{equation.4.12}%
+\contentsline {myequations}{\numberline {13}Ward Linkage}{20}{equation.4.13}%
+\contentsline {myequations}{\numberline {14}WB-Index}{27}{equation.4.14}%
+\contentsline {myequations}{\numberline {15}Silhouette Coefficient}{28}{equation.4.15}%
