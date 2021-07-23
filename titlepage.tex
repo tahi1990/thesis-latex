@@ -1,0 +1,144 @@
+%Fill these in and they'll propagate across the title page. Remember to keep the space at the end!
+\def \ajankohtaenglish {July 2021 }
+\def \authorname {Hiep Nguyen }
+\def \thesistitle {Trajectory Clustering }
+\def \campus {Joensuu }
+\def \facultyschooleng {School of Computer Science }
+%FT = PhD, FM = MSc
+\def \supervisorseng {Pasi Fr{\"a}nti and Radu Mariescu-Istodor}
+
+\def \documenttypeeng {Master's Thesis }
+%\def \documenttypeeng {Bachelor's Thesis}
+
+%Number of non-cover pages, to last page of references
+\def \mypagecount {70 }
+
+%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%
+
+\vspace*{3cm}
+\vspace{0.5cm}
+
+\begin{center}
+\begin{LARGE}\thesistitle \end{LARGE}
+
+\vspace{1.5cm}
+
+\begin{Large}\authorname \end{Large}
+
+\vspace{\stretch{1}}
+
+{\large
+\documenttypeeng
+~\\
+% to have it in black and white, swap the commented line
+% \includegraphics[width=7cm]{UEF_fin_pysty_1_cmyk}\\
+\includegraphics[width=7cm]{UEF_fin_pysty_1_black}\\
+Faculty of Science and Forestry\\
+\facultyschooleng \\
+\ajankohtaenglish \\
+}
+\end{center}
+
+\vspace{0.5cm}
+
+\thispagestyle{empty}
+
+\begin{spacing}{1.0}
+\newpage
+
+%%%%%%%%%%%%%%%%%% Abstract page in English %%%%%%%%%%%%%%%%%%
+
+UNIVERSITY OF EASTERN FINLAND, \\ Faculty of Science and Forestry, \campus \\ School of Computing \\
+\facultyschooleng \\ \\
+Student, \authorname : \thesistitle \\
+\documenttypeeng , \mypagecount p.
+Supervisors of the \documenttypeeng : \supervisorseng \\
+\ajankohtaenglish \\
+
+Abstract: In the past few years, there has been a significant advancement in the development of location-based positioning devices, and an increasing number of moving objects and their trajectories are being captured. Thus, it follows that the subject of moving object trajectory clustering is certain to be of prime importance to researchers working on data mining on moving objects. To give a context, we look at how development and the current trend in moving object clustering are in and then review common clustering techniques presented in the past few years.  In this thesis, we start by summarizing the basic characteristics of a trajectory. Second, we examine the metrics for determining the similarity/dissimilarity of two trajectories. Thirdly, we investigate the methods and implementation processes of conventional moving object clustering methods. Finally, the validation criteria used to assess the efficacy and efficiency of clustering algorithms are explored. 
+
+% Key words English
+
+~\\ % Tämä tekee tyhjän rivin; älä editoi tätä pois
+Keywords:
+trajectory, distance, similarity, clustering
+
+% CR-luokat
+
+% ACM-luokitus löytyy Computing Reviews -lehden jokaisen
+% vuosikerran ensimmäisestä numerosta sekä verkosta
+% osoitteesta http://www.acm.org/class/
+
+% Ota omat luokkasi tuoreimmasta vuosikerrasta.
+
+CR Categories (ACM Computing Classification System,
+1998 version): A.m, K.3.2\\
+
+\end{spacing}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%% Foreword/Preface %%%%%%%%%%%%%%%%%%
+
+\section*{Foreword}
+I am grateful to the University of Eastern Finland and to all of the teachers who helped me to obtain knowledge in many fields of computer science. It was a good opportunity for me to participate in the IMPIT programme. 
+
+I would like to thank my thesis supervisors, Professor Pasi Fr{\"a}nti and Dr. Radu Mariescu-Istodor, for their guidance throughout the years. I would not have been able to finish my thesis without their dedications, valuable suggestions, and advise. I believe that my research and time management have been improved significantly through their instructions.
+
+In the end, I want to express my appreciation and love to my family and friends for their mental support and encouragement.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%% Abbrieviations %%%%%%%%%%%%%%%%%%
+
+\section*{List of Abbreviations}
+
+\begin{tabular}{lp{12.5cm}}
+
+C-SIM & Cell-based similarity \\
+
+CI & Centroid Index \\
+
+CSI & Centroid Similarity Index \\
+
+DBSCAN & Density-based spatial clustering of applications with noise \\
+
+DTW & Dynamic Time Warping \\
+
+GPS & Global Positioning System \\
+
+HC-SIM & Hierarchical Cell Similarity \\
+
+HCA & Hierarchical Cluster Analysis \\
+
+LCSS & Longest Common Subsequence \\
+
+PSI & Pair Sets Index \\
+
+SSE & Sum of squares error \\
+
+SSB & Sum of squares between the clusters \\
+
+SSW & Sum of squares within the clusters
+
+\end{tabular}
+
+\newpage
+
+% ----------------- Table of Contents -------------
+
+\setlength{\parskip}{0ex}
+
+\tableofcontents
+\newpage
+
+\listoftables
+\newpage
+
+\listoffigures
+\newpage
+
+\listofmyequations
+\newpage
+
+\setlength{\parskip}{2ex}
