@@ -94,7 +94,7 @@ Measurement of how similar two trajectories are is a typical approach in a wide 
 There are two primary methodologies used for data clustering like trajectories. Specify trajectory clustering algorithms first, then use generic clustering methods to compare trajectory distance/dissimilarity. Density-based clustering \citep{kriegel2011density} is one of the most ideal clustering methods for trajectories since it can extract clusters of any form and is also tolerant to outliers \citep{ester1996density}. Density-Based Spatial Clustering of Applications with Noise (DBSCAN), is one of the most extensively used approaches in this group, which is commonly used \citep{zhao2019trajectory, cheng2018density, chen2011clustering, lee2007trajectory}. Fundamental to the clustering challenge is measuring similarity. To measure similarity (inverse distance), it should be done before grouping. The definition of distance in spatial trajectories is significantly complicated. Trajectories are non-linear sequences of points with various lengths in multiple dimensions. Thus, to compare two trajectories, a comprehensive approach is required to fully determine the distance between them. Different distance metrics are presented according to the analysis's goal and the data type. Due to the domain-specific nature of the concept of similarity, distinct distance metrics are defined to address various aspects of similarity, are temporal, spatio-temporal, and spatial. Euclidean, Fréchet, Hausdorff, DTW, and LCSS are the fundamental metrics in measuring similarity from which many additional metrics are derived \citep{abbaspour2017method, aghabozorgi2015time, wang2013effectiveness}.
 
 \section{Model for trajectory clustering}
-A trajectory is a series of time-stamped data that captures the path of moving things, such as humans, cars, animals, and natural features. For example, Global Position System (GPS) tracking devices generating a trajectory as $Trajectory=(A,B,\cdots,T_{n})$, which is a consecutive spatial space sequence of points, and $T_{i}$ indicates a combination of coordinates and timestamps such as $T_i=(x_{i},y_{i},t_{i})$.
+A trajectory is a series of time-stamped data that captures the path of moving things, such as humans, cars, animals, and natural features. For example, Global Position System (GPS) tracking devices generating a trajectory as $Trajectory=(T_{1},T_{2},\cdots,T_{n})$, which is a consecutive spatial space sequence of points, and $T_{i}$ indicates a combination of coordinates and timestamps such as $T_i=(x_{i},y_{i},t_{i})$.
 
 Clustering methods are designed to aggregate similar trajectories into distinct groups. This is a challenging task due to the trajectory complication, as objects within a particular region can take numerous paths. Clustering trajectories may be done in a variety of ways. We will focus on trajectory clustering based on distance but have also investigated alternative techniques. In most situations, trajectory data is represented as a multidimensional (2D or 3D) time series as in \autoref{fig3}. \cite{gaffney1999trajectory, vasquez2004motion, chen2012compression} used GPS trajectory clustering for improving data compression. The continuous definition of trajectory also applies by \cite{gariel2011trajectory} to re-sample trajectories to achieve equal-length time series. These new trajectories are then analyzed for the main components to obtain and finally cluster the primary components. The purpose is to group trajectories that follow similar paths. As clustering is focused on trajectories, and it necessitates a new distance measurement to define the similarity between them.
 
@@ -110,7 +110,7 @@ There has been considerable effort put into developing different trajectory dist
 \pagebreak
 
 \section{Trajectory Distance}
-A trajectory distance generalization that considered moving objects and measures on average how close two objects were during some time period. $d(A,B)$ represents the distance of two trajectories $A\,and\,B$. The greater the value, the less similarity between the two trajectories. Apart from the concept of mathematical distance, several measurements may be utilized to characterize this dissimilarity. Distances may be classified into two types: those based on the geometry of the trajectory (Shape-based distances) and those that consider temporal dimension (Warping based distance). 
+A trajectory distance generalization that considered moving objects and measures on average how close two objects were during some time period. $d(A,B)$ represents the distance of two trajectories $A\,and\,B$. The greater the value, the less similarity between the two trajectories. Apart from the concept of mathematical distance, several measurements may be utilized to characterize this dissimilarity. Distances may be categorized into two types: those based on the geometry of the trajectory (Shape-based distances) and those that consider temporal dimension (Warping based distance). 
 
 \subsection{Warping based distance}
 In the 1960s, Euclidean distance was suggested to calculate distance between time series, and now, during the last several decades, has been recognized to be one of the most commonly used distance functions \citep{keogh2000scaling,faloutsos1994fast,pfeifer1980three,priestley1980state}.
@@ -163,7 +163,7 @@ With $Head(A)$ denotes $a_1$, $Rest(A)$ denotes $\{a_2, \dots, a_n\}$ in case tr
     \label{fig6}
 \end{figure}
 
-In contrast to Euclidean distance, LCSS is robust to noise. LCSS similarity is defined as:
+In contrast to Euclidean distance, LCSS is robust to noise \citep{su2020survey}. LCSS similarity is defined as:
 \begin{equation} \label{eq3}
     \operatorname s_{LCSS}(A, B)=\left\{\begin{array}{c}0, \text { if } n=0 \text { or } m=0 \\ 1+\operatorname{LCSS}(\operatorname{Rest}(A), \operatorname{Rest}(B)), \text { if } d(\operatorname{Head}(A), \operatorname{Head}(B)) \leq \varepsilon \\ \max (\operatorname{LCSS}(\operatorname{Rest}(A), B), \operatorname{LCSS}(A, \operatorname{Rest}(B))), \text { otherwise }\end{array}\right.
 \end{equation}
@@ -185,7 +185,7 @@ However, there are two major drawbacks to using warping-based distance:
 \end{itemize}
 
 \subsection{Shape based distance}
-Instead of matching the trajectory sample points, these distances compare the shape of trajectories. This indicates that trajectories are clustered regardless of their location. The most well-known distances are the Hausdorff and Fréchet.
+Rather than matching the trajectory sample points, these distances compare the shape of trajectories. This indicates that trajectories are clustered regardless of their location. The most well-known distances are the Hausdorff and Fréchet.
 
 \subsubsection{Fréchet distance}
 The Fréchet distance \citep{eiter1994computing} is a method that measure similarity between curves considers both the location and sequence of points. The Fréchet distance between the two curves as shown in \autoref{fig7} is the shortest length of leash necessary for both paths to be traversed.

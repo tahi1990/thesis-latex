@@ -860,10 +860,11 @@ INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/titlepage.tex
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/ecrm2074.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/ecrm1728.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
-INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/UEF_fin_pysty_1_black.pdf
-INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/UEF_fin_pysty_1_black.pdf
-INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/UEF_fin_pysty_1_black.pdf
-INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/UEF_fin_pysty_1_black.pdf
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images//UEF logo.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images//UEF logo.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images//UEF logo.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images//UEF logo.png
+INPUT /Users/tahi1990/Documents/UEF/Thesis/Thesis Latex/./images//UEF logo.png
 INPUT /usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/ecbx1728.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
